@@ -1,0 +1,7 @@
+# ROS build artifacts
+install/
+build/
+log/
+
+# IDE specific
+.vscode/
