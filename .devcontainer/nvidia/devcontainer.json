@@ -1,0 +1,40 @@
+{
+    "name": "ROS 2 Development Container (nvidia)",
+    "privileged": true,
+    "build": {
+        "dockerfile": "../Dockerfile",
+        "args": {
+            "USERNAME": "ros2dev"
+        }
+    },
+    "workspaceFolder": "/home/ws",
+    "workspaceMount": "source=${localWorkspaceFolder},target=/home/ws,type=bind",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-vscode.cpptools-extension-pack",
+                "ms-vscode.cmake-tools",
+                "ms-python.python",
+                "eamodio.gitlens",
+                "Ranch-Hand-Robotics.rde-pack",
+                "redhat.vscode-xml"
+            ]
+        }
+    },
+    "containerEnv": {
+        "ROS_DOMAIN_ID": "42",
+        "ROS_AUTOMATIC_DISCOVERY_RANGE": "LOCALHOST",
+        "DISPLAY": "${localEnv:DISPLAY}"
+    },
+    "runArgs": [
+        "--net=host",
+        "--pid=host",
+        "--ipc=host",
+        "--runtime=nvidia",
+        "--gpus=all"
+    ],
+    "mounts": [
+        "source=/dev/input,target=/dev/input,type=bind,consistency=cached"
+    ],
+    "postCreateCommand": "sudo rosdep update && sudo rosdep install --from-paths src --ignore-src -y && sudo chown -R $(whoami) /home/ws/ && echo 'source /opt/ros/kilted/setup.bash' >> ~/.bashrc"
+}

@@ -1,8 +1,8 @@
 {
-    "name": "ROS 2 Development Container",
+    "name": "ROS 2 Development Container (dri)",
     "privileged": true,
     "build": {
-        "dockerfile": "Dockerfile",
+        "dockerfile": "../Dockerfile",
         "args": {
             "USERNAME": "ros2dev"
         }
@@ -29,12 +29,11 @@
     "runArgs": [
         "--net=host",
         "--pid=host",
-        "--ipc=host",
-        "--runtime=nvidia",
-        "--gpus=all"
+        "--ipc=host"
     ],
     "mounts": [
-        "source=/dev/input,target=/dev/input,type=bind,consistency=cached"
+        "source=/dev/input,target=/dev/input,type=bind,consistency=cached",
+        "source=/dev/dri,target=/dev/dri,type=bind"
     ],
     "postCreateCommand": "sudo rosdep update && sudo rosdep install --from-paths src --ignore-src -y && sudo chown -R $(whoami) /home/ws/ && echo 'source /opt/ros/kilted/setup.bash' >> ~/.bashrc"
 }

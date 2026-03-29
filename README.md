@@ -6,8 +6,6 @@
 
 This repository provides a pre-configured environment for Robot Operating System (ROS) development using Dev Containers.
 
-> Support for Dev Containers is currently limited to Linux-based systems with NVIDIA GPUs.
-
 ---
 
 ### Features
